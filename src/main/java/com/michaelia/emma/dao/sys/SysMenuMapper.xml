@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rivamed.nbm.permissions.mapper.SysMenuMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap"
+		type="com.michaelia.emma.entity.sys.SysMenu">
+		<result column="id" property="id" />
+		<result column="parent_id" property="parentId" />
+		<result column="name" property="name" />
+		<result column="url" property="url" />
+		<result column="perms" property="perms" />
+		<result column="type" property="type" />
+		<result column="icon" property="icon" />
+		<result column="order_num" property="orderNum" />
+		<result column="parentName" property="parentName"/>
+	</resultMap>
+
+	<!-- 通用查询结果列 -->
+	<sql id="Base_Column_List">
+		id,
+		parent_id, name, url, perms, type, icon, order_num
+	</sql>
+	
+	<select id="getMenuByUser" resultMap="BaseResultMap">
+		SELECT
+            DISTINCT sp.*
+        FROM
+            sys_role_menu srp
+            INNER JOIN sys_menu sp ON srp.menu_id = sp.id
+        WHERE
+            srp.role_id IN (
+                SELECT
+                    role_id
+                FROM
+                    sys_user_role sur
+                    INNER JOIN sys_role sr ON sur.role_id = sr.id
+                WHERE
+                    sur.user_id = #{userId}
+            )
+            AND sp.status = #{status}
+		ORDER BY sp.id ASC 
+	</select>
+	
+	<select id="getAllMenu" resultMap="BaseResultMap">
+		select m.*,(select p.name from sys_menu p where p.id = m.parent_id) as parentName 
+		from sys_menu m
+		where m.status = #{status}
+		order by m.order_num asc
+	</select>
+	
+	<select id="getMenuByRole" resultMap="BaseResultMap">
+		SELECT m.* FROM sys_role_menu rm 
+		LEFT JOIN sys_menu m 
+		ON rm.menu_id = m.id
+		WHERE rm.role_id = #{roleId}
+		AND m.status = #{status}
+	</select>
+</mapper>

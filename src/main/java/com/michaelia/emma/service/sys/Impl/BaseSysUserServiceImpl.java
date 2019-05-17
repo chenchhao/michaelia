@@ -1,0 +1,19 @@
+package com.michaelia.emma.service.sys.Impl;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.michaelia.emma.dao.sys.SysUserMapper;
+import com.michaelia.emma.entity.sys.SysUser;
+
+/**
+ * 方法名:          BaseSysUserServiceImpl
+ * 方法功能描述:
+ *
+ * @param:
+ * @return:
+ * @Author: 陈超
+ * @Create Date:   2019/5/13
+ */
+public class BaseSysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> {
+
+
+}
