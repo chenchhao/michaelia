@@ -1,10 +1,18 @@
 package com.michaelia.emma.config;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.michaelia.emma.entity.sys.SysMenu;
+import com.michaelia.emma.entity.sys.SysRole;
+import com.michaelia.emma.entity.sys.SysUser;
+import com.michaelia.emma.service.sys.BaseSysMenuService;
+import com.michaelia.emma.service.sys.BaseSysRoleService;
+import com.michaelia.emma.service.sys.BaseSysUserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 
@@ -16,20 +24,20 @@ import java.util.List;
  *
  */
 public class UserRealm extends AuthorizingRealm {
-   /* @Autowired
+   @Autowired
     @Lazy
-    private SysRoleService sysRoleService;
+    private BaseSysRoleService sysRoleService;
     @Autowired
     @Lazy
-    private SysMenuService sysMenuService;
+    private BaseSysMenuService sysMenuService;
     @Autowired
     @Lazy
-    private SysUserService sysUserService;*/
+    private BaseSysUserService sysUserService;
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        /*SysUser sysUser = (SysUser) principals.getPrimaryPrincipal();
+        SysUser sysUser = (SysUser) principals.getPrimaryPrincipal();
 		List<SysRole> roles = sysRoleService.getRoleByUser(sysUser.getId());
 		if (null != roles && roles.size() > 0) {
 			for (SysRole role : roles) {
@@ -41,18 +49,18 @@ public class UserRealm extends AuthorizingRealm {
 			for (SysMenu perm : sysMenu) {
 				authorizationInfo.addStringPermission(perm.getPerms());
 			}
-		}*/
+		}
         return authorizationInfo;
     }
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) {
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
-       /* String username = usernamePasswordToken.getUsername();
+        String username = usernamePasswordToken.getUsername();
         QueryWrapper<SysUser> ew = new QueryWrapper<SysUser>();
         ew.eq("job_no",username);
         SysUser userInfo = sysUserService.getOne(ew);
-        
+
         // 账户不存在
         if (userInfo == null) {
             throw new UnknownAccountException();
@@ -60,12 +68,12 @@ public class UserRealm extends AuthorizingRealm {
         // 账户被冻结
         if (userInfo.getStatus() == 0) {
             throw new LockedAccountException();
-        }*/
+        }
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-               /* userInfo,
+                userInfo,
                 userInfo.getPassword(),
-                *//*ByteSource.Util.bytes(userInfo.getCredentialsSalt()),*//*
-                getName()*/);
+                /*ByteSource.Util.bytes(userInfo.getCredentialsSalt()),*/
+                getName());
         return authenticationInfo;
     }
 
