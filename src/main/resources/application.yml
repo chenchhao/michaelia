@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 8084
   servlet:
     session:
       timeout: 1440m
@@ -16,26 +16,27 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/xx?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://192.168.10.44:3306/rm-nbm?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
-    password: xx
+    password: Rivamed@2018
     druid:
       initial-size: 5
       min-idle: 5
       max-active: 100
-      max-wait: 60000  # 获取连接等待超时的时间
-      time-between-eviction-runs-millis: 60000 # 配置间隔多久才进行一次检测
-      min-evictable-idle-time-millis: 300000 # 配置一个连接在池中最小生存的时间
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
       validation-query: SELECT 1 FROM DUAL
       test-while-idle: true
       test-on-borrow: false
       test-on-return: false
       pool-prepared-statements: true
-      filters: stat, wall # 配置监控统计拦截的filters
-      max-pool-prepared-statement-per-connection-size: 20 # 打开PSCache
-      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500 # 慢SQL记录
-      use-global-data-source-stat: true # 合并多个DruidDataSource的监控数据
+      filters: stat, wall
+      max-pool-prepared-statement-per-connection-size: 20
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+      use-global-data-source-stat: true
 #mybatis-plus
 mybatis-plus:
   mapper-locations:
     - classpath:/com/michaelia/emma/dao/*/*Mapper.xml
+

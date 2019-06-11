@@ -38,9 +38,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/websocket.html", "anon");
         filterChainDefinitionMap.put("/websocket/**", "anon");
         filterChainDefinitionMap.put("/sysUser/getAdminPhone", "anon");
-        filterChainDefinitionMap.put("/baseSetSingle/save", "anon");
         filterChainDefinitionMap.put("/sysUser/getUserRoleNoLogin/**", "anon");
-        filterChainDefinitionMap.put("/baseSetSingle/upload_result/**", "anon");
         filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setLoginUrl("/unlogin");
