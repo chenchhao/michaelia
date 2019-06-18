@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.rivamed.nbm.permissions.mapper.SysRoleMapper">
+<mapper namespace="com.michaelia.emma.dao.sys.SysRoleMapper">
 
-	<!-- 通用查询映射结果 -->
 	<resultMap id="BaseResultMap"
 		type="com.michaelia.emma.entity.sys.SysRole">
 		<result column="id" property="id" />
@@ -15,7 +14,6 @@
 		<result column="remark" property="remark" />
 	</resultMap>
 
-	<!-- 通用查询结果列 -->
 	<sql id="Base_Column_List">
 		id,
 		create_time,
@@ -26,6 +24,7 @@
 		role_code,
 		remark
 	</sql>
+
 
 	<select id="getRoleByUser" resultMap="BaseResultMap">
 		SELECT sr.*

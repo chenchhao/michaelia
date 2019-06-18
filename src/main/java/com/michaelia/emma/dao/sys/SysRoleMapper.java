@@ -22,7 +22,5 @@ public interface SysRoleMapper extends BaseMapper<SysRole> {
      */
     List<SysRole> getRoleByUser(@Param("userId") Long userId);
     
-    List<SysRole> getAllRole();
-
     List<SysRole> getUserRoleNoLogin(String jobNo);
 }
